@@ -1,0 +1,17 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+publishDir="docs"
+disqusShortname = "dev-learning"
+[params]
+  afterDomain='tutorials'
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
+
+[taxonomies]
+  category="categories"
+  tag="tags"
+  author="authors"
+  courses='course'
+  course_tags='course_tag'
+  course_parents='course_parent'
