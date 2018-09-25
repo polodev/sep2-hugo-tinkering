@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-</head>
-<body>
+{{define "main"}}
+
+{{$course_name := index (.Params.courses) 0}}
+{{$post_courses := .Params.courses }}
+<h2>Test 3</h2>
+{{range $taxonomy_key, $taxonomy := $.Site.Taxonomies.courses}}
+  {{if in $post_courses $taxonomy_key}}
+    <section id="menu">
+      {{ range $taxonomy.Pages.GroupByParam "group_name" }}
+        <h3>{{ .Key }}</h3>
+        <ul>
+            {{ range .Pages.ByWeight }}
+            <li>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+              <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+            </li>
+            {{ end }}
+        </ul>
+
+      {{ end }}
+    </section>
+
+  {{end}}
+{{end}}
+<h2>All post end</h2>
+
+<hr>
+
+
+
 <div id="single_page_content">
   <h1 class="post_title">
     <a href="{{.URL}}">{{.Title}}</a>
@@ -30,9 +52,9 @@
     {{.Content}}
   </div>
   <!-- /.article -->
-  {{if .Params.tags }}
+  {{if .Params.courses }}
     <div class='tags py-3'>
-      Tags: {{ range .Params.tags }}
+      courses: {{ range .Params.courses }}
         <a href="{{$.Site.BaseURL}}tags/{{ . | urlize }}">
           {{ . }}
         </a>
@@ -52,10 +74,4 @@
   </div>
 
 </div>
-<progress value="0" id="progressBar">
-  <div class="progress-container">
-    <span class="progress-bar"></span>
-  </div>
-</progress>
-</body>
-</html>
+{{end }}

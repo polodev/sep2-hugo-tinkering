@@ -11,7 +11,7 @@ disqusShortname = "dev-learning"
 [taxonomies]
   category="categories"
   tag="tags"
-  author="authors"
-  courses='course'
-  course_tags='course_tag'
-  course_parents='course_parent'
+  authors="authors"
+  course='courses'
+  course-tag='course-tags'
+  course-parent='course-parents'

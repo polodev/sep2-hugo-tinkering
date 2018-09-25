@@ -1,4 +1,46 @@
+
 {{define "main"}}
+  <div>
+
+    <h2>All course</h2>
+    <ul class="list-group">
+      {{ range $key, $value := .Site.Taxonomies.courses }}
+      <li class="list-group-item">
+        <a class="btn btn-link" href="{{$value}}">{{ $key | humanize }}</a> ({{len $value }})
+      </li>
+      {{ end }}
+    </ul>
+
+    <h2>All courses with grouping</h2>
+    <section id="menu">
+      {{ range .Pages.GroupByParam "group_name" }}
+        <h3>{{ .Key }}</h3>
+        <ul>
+            {{ range .Pages }}
+            <li>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+            </li>
+            {{ end }}
+        </ul>
+      {{ end }}
+    </section>
+
+<h2>All courses with nested course topics</h2>
+<section id="menu">
+  <ul>
+      {{ range $key, $taxonomy := .Site.Taxonomies.courses }}
+      <li>{{ $key }}</li>
+      <ul>
+          {{ range $taxonomy.Pages }}
+          <li data-group="{{ .Params.group_name }}" hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink}}">{{ .LinkTitle }}</a></li>
+          {{ end }}
+      </ul>
+      {{ end }}
+  </ul>
+</section>
+
+  </div>
    <div>
   <h2 class="mb-4">All posts under <span class='mark'>{{.Title}} </span> </h2>
   {{ $paginator := .Paginate (where .Data.Pages "Type" "course") }}
