@@ -199,8 +199,8 @@ taxonomy/course.html
 ~~~bash
 {{$post_courses := .Params.courses }}
 <h2>Test 3</h2>
-{{range $taxonomy_key, $taxonomy := $.Site.Taxonomies.courses}}
-  {{if in $post_courses $taxonomy_key}}
+{{range $taxonomy_name, $taxonomy := $.Site.Taxonomies.courses}}
+  {{if in $post_courses $taxonomy_name}}
     <section id="menu">
       {{ range $taxonomy.Pages.GroupByParam "group_name" }}
         <h3>{{ .Key }}</h3>
