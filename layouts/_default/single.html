@@ -2,24 +2,35 @@
 
 {{$course_name := index (.Params.courses) 0}}
 {{$post_courses := .Params.courses }}
-<h2>Test 3</h2>
+{{$post_group_name := .Params.group_name}}
+
+<h2>Menu</h2>
 {{range $taxonomy_key, $taxonomy := $.Site.Taxonomies.courses}}
   {{if in $post_courses $taxonomy_key}}
     <section id="menu">
-      {{ range $taxonomy.Pages.GroupByParam "group_name" }}
-        <h3>{{ .Key }}</h3>
+      {{if $post_group_name }}
+        {{ range $taxonomy.Pages.GroupByParam "group_name" }}
+          <h3>{{ .Key }}</h3>
+          <ul>
+              {{ range .Pages.ByWeight }}
+              <li>
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+              </li>
+              {{ end }}
+          </ul>
+        {{ end }}
+     {{ else }} 
         <ul>
-            {{ range .Pages.ByWeight }}
+            {{ range $taxonomy.Pages.ByWeight }}
             <li>
               <a href="{{ .Permalink }}">{{ .Title }}</a>
               <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
             </li>
             {{ end }}
         </ul>
-
-      {{ end }}
+      {{end}}
     </section>
-
   {{end}}
 {{end}}
 <h2>All post end</h2>

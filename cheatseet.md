@@ -220,3 +220,37 @@ taxonomy/course.html
 {{end}}
 
 ~~~
+
+
+# if course doesn't have grouping item - added if else statement 
+~~~bash
+<h2>Menu</h2>
+{{range $taxonomy_key, $taxonomy := $.Site.Taxonomies.courses}}
+  {{if in $post_courses $taxonomy_key}}
+    <section id="menu">
+      {{if $post_group_name }}
+        {{ range $taxonomy.Pages.GroupByParam "group_name" }}
+          <h3>{{ .Key }}</h3>
+          <ul>
+              {{ range .Pages.ByWeight }}
+              <li>
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+              </li>
+              {{ end }}
+          </ul>
+        {{ end }}
+     {{ else }} 
+        <ul>
+            {{ range $taxonomy.Pages.ByWeight }}
+            <li>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+              <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
+            </li>
+            {{ end }}
+        </ul>
+      {{end}}
+    </section>
+  {{end}}
+{{end}}
+~~~

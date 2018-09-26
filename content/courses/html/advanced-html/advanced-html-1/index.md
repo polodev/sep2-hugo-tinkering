@@ -10,7 +10,6 @@ categories=['advanced-html']
 course-tags=['html']
 course-parents=['html']
 weight= 1 
-group_name='ad1'
 +++
 
 Advanced html 1
