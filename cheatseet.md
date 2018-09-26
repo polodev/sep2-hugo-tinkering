@@ -254,3 +254,15 @@ taxonomy/course.html
   {{end}}
 {{end}}
 ~~~
+
+# showing categories inside a single post - relLangURL to relURL
+~~~bash
+{{ with .Params.categories -}}
+  <div class="post-category">
+    {{ range . }}
+      <a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a>
+    {{ end }}
+  </div>
+{{- end }}
+
+~~~
