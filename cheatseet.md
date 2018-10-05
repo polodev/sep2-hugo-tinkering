@@ -1,3 +1,18 @@
+# frontmatter
+
+~~~bash
+post_type: enum[tutorials, courses, bits, series] for search entry
+type='course'
+title = "{{ replace .Name "-" " " | title }}"
+date = {{ .Date }}
+draft = false
+author = "shibu dev"
+toc = true
+courses=['basic-php']
+course_tags=['php']
+course_parents=['php']
+weight=100
+~~~
 # menu will be like gohugo like in front matter
 
 # adding custom metadata for hugo taxonomy
